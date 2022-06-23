@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Elenco operatori</title>
+</head>
+
+<body>
+	<div>
+		<h4>Elenco operatori:</h4>
+		<ul>
+			<li th:each="operatore : ${elencoOperatori}">
+			
+			
+			<a href="operatore.html" th:href="@{'/operatore' + '/' + ${operatore.id}}" 
+			th:text="${operatore.nome} + ' ' + ${operatore.cognome}">NOME COGNOME FOTO</a>
+			
+						
+			<span> --- </span>
+			<a href ="chef.html" th:href="@{'/toDeleteOperatore' + '/' + ${operatore.id}}"
+			th:text="cancella_operatore">cancella</a>
+			<span> --- </span>
+			<a th:href="@{'/operatore' + '/' + ${operatore.id} + '/caneForm'}"> Inserisci Cane </a>
+			<span> --- </span>
+			<a th:href="@{'/operatore' + '/' + ${operatore.id} + '/elencoCani'}"> Visualizza Cani </a>
+			
+			</li> 
+		</ul>
+	</div>
+		
+	<footer>
+		<a href="/default">Home</a>
+	</footer>
+</body>
+</html>

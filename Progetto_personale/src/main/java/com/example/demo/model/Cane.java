@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cane {
@@ -25,11 +23,6 @@ public class Cane {
 	@NotBlank
 	private String razza;
 	
-	@NotNull
-	@Min(0)
-	@Max(30)
-	private Integer eta; //Integer perché così ho anche il valore nullo
-	
 	@NotBlank
 	private String curriculum;
 	
@@ -39,9 +32,14 @@ public class Cane {
 	
 	
 	
+	//un operatore addestrano più cani
+	@ManyToOne
+	private Operatore operatore;
 	
 	
-	
+	//più cani possono intraprendere lo stesso percorso
+	@ManyToOne
+	private Percorso percorso;
 	
 	
 
@@ -79,14 +77,6 @@ public class Cane {
 		this.razza = razza;
 	}
 
-	public Integer getEta() {
-		return eta;
-	}
-
-	public void setEta(Integer eta) {
-		this.eta = eta;
-	}
-
 	public String getCurriculum() {
 		return curriculum;
 	}
@@ -102,6 +92,15 @@ public class Cane {
 	public void setPhotos(String photos) {
 		this.photos = photos;
 	}
+
+	public Operatore getOperatore() {
+		return operatore;
+	}
+
+	public void setOperatore(Operatore operatore) {
+		this.operatore = operatore;
+	}
 	
 
+	
 }

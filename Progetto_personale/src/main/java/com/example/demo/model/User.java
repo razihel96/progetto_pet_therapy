@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,17 @@ public class User {
 	private Long id;
 	private String nome;
 	private String cognome;
+	private String indirizzo;
 	
+	
+	
+	//un utente può intraprendere un solo percorso
+	@ManyToOne
+	private Percorso percorso;
+	
+	
+	
+	/* SETTERS & GETTERS */
 	public Long getId() {
 		return id;
 	}
@@ -39,5 +50,15 @@ public class User {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	
+	
 
 }

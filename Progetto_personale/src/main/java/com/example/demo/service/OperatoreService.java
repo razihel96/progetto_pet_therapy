@@ -1,5 +1,51 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Operatore;
+import com.example.demo.repository.OperatoreRepository;
+
+@Service
 public class OperatoreService {
 
+	@Autowired
+	private OperatoreRepository operatoreRepository;
+
+	
+	
+	
+	
+	public void save(Operatore operatore) {
+		operatoreRepository.save(operatore);
+	}
+	
+	public void delete(Operatore operatore) {
+		operatoreRepository.delete(operatore);
+	}
+	
+	public boolean alreadyExists(Operatore operatore) {
+		return operatoreRepository.existsByNomeAndCognome(operatore.getNome(), operatore.getCognome());
+	}
+
+	public Operatore findById(Long id) {
+		return operatoreRepository.findById(id).get();
+	}
+
+	
+	//mi ritorna la lista di tutti gli operatori
+	public List<Operatore> findAll() {
+		List<Operatore> operatori = new ArrayList<>();
+		for(Operatore o : operatoreRepository.findAll()) {
+			operatori.add(o);
+		}
+		return operatori;
+	}
+
+	public void deleteById(Long id) {
+		operatoreRepository.deleteById(id);
+	}
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title> Associazione Pet-therapy </title>
+</head>
+
+<body>
+
+	<h6>Menu Amministratore</h6>
+		
+	<h4>Associazione Pet-therapy</h4>
+	<div>
+		<a th:href="@{/operatoreForm}"> Inserisci Operatore </a>
+		<a th:href="@{/operatore}"> </a> 
+	</div>	
+	<div>
+		<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
+		<a th:href="@{/operatore}"> </a> 
+	</div>
+	<br>
+	<div>
+		<a th:href="@{/logout}">Logout</a>
+    </div>
+
+		
+</body>
+</html>

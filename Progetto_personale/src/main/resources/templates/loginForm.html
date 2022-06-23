@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+	<meta charset="UTF-8" />
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	
+	<title> LoginForm </title>
+</head>
+
+
+
+<body>
+    <div>
+        <h1>Associazione Pet-therapy</h1>
+    </div>
+
+	<form th:action="@{/login}" method="POST">
+		<div>
+			
+				<span>Username:</span>
+				<span><input name="username" type="text" required /></span>
+			
+					
+			
+				<span>Password:</span>
+				<span><input name="password" type="password" required /></span>
+			
+			
+			
+				<span><button type="submit"> Login </button></span>
+			
+		</div>
+	</form>
+
+    <footer>
+    	<a href="/"> Home </a>
+    </footer>
+    
+  
+</body>
+</html>

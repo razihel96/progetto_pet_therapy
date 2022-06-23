@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Elenco cani</title>
+</head>
+
+<body>
+	<div>
+		<h4>Elenco cani:</h4>
+		<ul>
+			<li th:each="cane : ${elencoCani}">
+			
+			<a href="cane.html" th:href="@{'/cane' + '/' + ${cane.id}}" 
+			th:text="${cane.nome}">NOME</a>
+			<span> --- </span>
+			<a href ="cane.html" th:href="@{'/toDeleteCane' + '/' + ${cane.id}}"
+			th:text="cancella_cane">cancella</a>
+			<span> --- </span>
+			<a th:href="@{'/cane' + '/' + ${cane.id} + '/percorsoForm'}"> Inserisci percorso </a> 
+
+		
+			
+			</li> 
+			
+			
+		</ul>
+	</div>
+		
+	<footer>
+		<a href="/default"> Home </a>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title> Inserimento cane </title>
+</head>
+
+<body>
+<form th:action = "@{/cane}" method = "post" th:object = "${cane}" enctype="multipart/form-data">
+
+	<div th:if="${#fields.hasGlobalErrors()}">
+		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">ERRORE</p>
+	</div>
+	  
+	  
+	<div> Microchip: <input type="text" th:field="*{microchip}" /> </div>
+	<div th:if="${#fields.hasErrors('microchip')}" th:errors="*{microchip}"></div>
+	
+	<div> Nome: <input type="text" th:field="*{nome}" /> </div>
+	<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+	
+	<div> Razza: <input type="text" th:field="*{razza}" /> </div>
+	<div th:if="${#fields.hasErrors('razza')}" th:errors="*{razza}"></div>
+	
+	<div> Curriculum: <input type="text" th:field="*{curriculum}" /> </div>
+	<div th:if="${#fields.hasErrors('curriculum')}" th:errors="*{curriculum}"></div>
+	
+	
+	
+	<div> Foto: <input type="file" name="image" accept="image/png, image/jpeg" required/> </div>
+	
+	
+	
+	<br>
+	<br>
+	
+	<!-- verifico se sto inserendo il cane corrente all'operatore giusto -->
+	<div th:text=*{operatore.nome}> mi ritorna il nome dell'operatore </div>
+	
+	
+	<div> 
+		<!-- per farmi ritornare il nome dell'operatore devo passargli il suo id -->
+		<input type="hidden" name="idOperatore" th:value=*{operatore.id}> 
+		<button type="submit"> Conferma </button> 
+	</div>
+</form>	
+</body>
+
+
+</html>

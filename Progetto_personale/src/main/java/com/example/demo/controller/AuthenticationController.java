@@ -33,17 +33,17 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "registerUser";
+		return "registerUser.html";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
-		return "loginForm";
+		return "loginForm.html";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index";
+		return "index.html";
 	}
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/home";
+            return "admin/home.html";
         }
         return "home_default";
     }
@@ -74,8 +74,8 @@ public class AuthenticationController {
             // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            return "registrationSuccessful";
+            return "registrationSuccessful.html";
         }
-        return "registerUser";
+        return "registerUser.html";
     }
 }
