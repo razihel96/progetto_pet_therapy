@@ -11,10 +11,8 @@
 	<div th:if="${#fields.hasGlobalErrors()}">
 		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">ERRORE</p>
 	</div>
-	  
-	  
-	<div> Microchip: <input type="text" th:field="*{microchip}" /> </div>
-	<div th:if="${#fields.hasErrors('microchip')}" th:errors="*{microchip}"></div>
+	
+	 
 	
 	<div> Nome: <input type="text" th:field="*{nome}" /> </div>
 	<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
@@ -29,13 +27,20 @@
 	
 	<div> Foto: <input type="file" name="image" accept="image/png, image/jpeg" required/> </div>
 	
-	
+	<br>
+	<br>
+	<span>Associa al cane un percorso: </span>
+	<br>
+	<span th:each="data : ${elencoPercorsi}">
+	<input type="radio" th:field="*{percorso}" th:value="${data.id}"/>
+	<label th:text="${data.nome}"></label>
+	</span>
 	
 	<br>
 	<br>
 	
 	<!-- verifico se sto inserendo il cane corrente all'operatore giusto -->
-	<div th:text=*{operatore.nome}> mi ritorna il nome dell'operatore </div>
+	<div th:text="'Cane addestrato da: ' + *{operatore.nome}"> mi ritorna il nome dell'operatore </div>
 	
 	
 	<div> 

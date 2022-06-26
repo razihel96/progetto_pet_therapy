@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,8 @@ public class OperatoreService {
 	private OperatoreRepository operatoreRepository;
 
 	
-	
+	@Autowired
+	private CredentialsService credentialsService;
 	
 	
 	public void save(Operatore operatore) {
@@ -48,4 +51,12 @@ public class OperatoreService {
 	public void deleteById(Long id) {
 		operatoreRepository.deleteById(id);
 	}
+	
+	
+	@Transactional
+	public CredentialsService getCredentialsService() {
+		return credentialsService;
+	}
+	
+	
 }

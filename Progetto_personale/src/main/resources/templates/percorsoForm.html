@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title> Inserimento percorso </title>
+</head>
+
+<body>
+<form th:action = "@{/percorso}" method = "post" th:object = "${percorso}">
+
+	<div th:if="${#fields.hasGlobalErrors()}">
+		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">ERRORE</p>
+	</div>
+	
+	 
+	
+	<div> Nome: <input type="text" th:field="*{nome}" /> </div>
+	<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+	
+	<div> Descrizione: <input type="text" th:field="*{descrizione}" /> </div>
+	<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
+	
+	
+	<br>
+	<br>
+			<button type="submit"> Conferma </button> 
+	
+
+</form>	
+</body>
+
+
+</html>

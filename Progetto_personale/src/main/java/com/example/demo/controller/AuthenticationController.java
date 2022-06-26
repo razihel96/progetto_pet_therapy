@@ -54,7 +54,7 @@ public class AuthenticationController {
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home.html";
         }
-        return "home_default";
+        return "admin/home.html";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)

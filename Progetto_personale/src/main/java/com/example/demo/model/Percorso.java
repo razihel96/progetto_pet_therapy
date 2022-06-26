@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,12 +26,12 @@ public class Percorso {
 	
 	
 	//percorso intrapreso da più cani
-	@OneToMany(mappedBy="operatore")
+	@OneToMany(mappedBy="operatore", cascade=CascadeType.REMOVE)
 	private List<Cane> cani;
 	
 	
 	//un percorso può essere intrapreso da più utenti
-	@OneToMany(mappedBy="percorso")
+	@OneToMany(mappedBy="percorso", cascade=CascadeType.ALL)
 	private List<User> users;
 	
 	
@@ -59,6 +60,22 @@ public class Percorso {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public List<Cane> getCani() {
+		return cani;
+	}
+
+	public void setCani(List<Cane> cani) {
+		this.cani = cani;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 	

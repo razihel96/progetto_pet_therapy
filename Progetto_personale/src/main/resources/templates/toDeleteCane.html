@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1" />
+	<title>Conferma Cancellazione</title>
+</head>
+
+<body>
+	<div>
+		<h4>Cane da cancellare:</h4>
+		<div>
+			<span th:text = "${cane.nome}"> COGNOME </span>
+			<span th:text = "${cane.razza}"> RAZZA </span>
+			
+			
+		</div>
+		
+		<div>
+			<a href ="cane.html" th:href="@{'/admin/deleteCane' + '/' + ${cane.id}}"
+			th:text="CONFERMA">CONFERMA CANCELLAZIONE</a>
+		</div>	
+	</div>
+		
+</body>
+</html>

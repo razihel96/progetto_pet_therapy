@@ -2,16 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title> Dettagli buffet </title>
+	<title> Dettagli cane </title>
 </head>
 
 <body>
 	<div>
-		<h4> Dettagli buffet </h4>
+		<h4> Dettagli Cane </h4>
 		<div>
 		
-			<span th:text = "${cane.microchip}"> MICROCHIP </span>
-			<br>
+
 			<span th:text = "${cane.nome}"> NOME </span>
 			<br>
 			<span th:text = "${cane.razza}"> RAZZA </span>
@@ -22,7 +21,11 @@
 			
 			
 			<span>Foto: </span>
-			<img th:src="@{${cane.photosImagePath}}" width="80" height="80" />
+			<img th:src="@{${cane.photosImagePath}}" width="180" height="180" />
+			
+			<br>
+			<br>
+			<span th:text = "'Cane addestrato per il percorso: ' + ${percorso.nome}"> PERCORSO </span>
 			
 			
 			<br>

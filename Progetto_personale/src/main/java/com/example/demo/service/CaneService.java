@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ import com.example.demo.repository.CaneRepository;
 @Service
 public class CaneService {
 
-	//repository
 	@Autowired
 	private CaneRepository caneRepository;
+	
+	@Autowired
+	private CredentialsService credentialsService;
+	
+	
+	
 
 	public void save(Cane cane) {
 		caneRepository.save(cane);
@@ -27,7 +34,7 @@ public class CaneService {
 	}
 	
 	public boolean alreadyExists(Cane cane) {
-		return caneRepository.existsByMicrochip(cane.getMicrochip());
+		return caneRepository.existsByNome(cane.getNome());
 	}
 
 	//IMMAGINI
@@ -68,6 +75,17 @@ public class CaneService {
 		caneRepository.deleteById(id);
 	}
 	
+	
+	@Transactional
+	public CredentialsService getCredentialsService() {
+		return credentialsService;
+	}
+
+	public Cane saveCane(Cane caneid) {
+		return caneRepository.save(caneid);
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

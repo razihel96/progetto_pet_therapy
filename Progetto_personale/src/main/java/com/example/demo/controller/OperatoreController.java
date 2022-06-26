@@ -13,23 +13,42 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.controller.validator.OperatoreValidator;
 import com.example.demo.model.Operatore;
 import com.example.demo.service.OperatoreService;
+
+
+
 
 @Controller
 public class OperatoreController {
 
 	@Autowired
 	OperatoreService operatoreService;
+	
+	@Autowired 
+	OperatoreValidator operatoreValidator;
 
+	
+	
 
 	@PostMapping("/operatore") 
 	public String addOperatore(@Valid @ModelAttribute("operatore") Operatore operatore, 
 			BindingResult bindingResult, Model model) {
 
+		
+		
+		operatoreValidator.validate(operatore, bindingResult);
+		
+		
+		
 		if(!bindingResult.hasErrors()) {
 			operatoreService.save(operatore);
 			model.addAttribute("operatore", operatore);
+			model.addAttribute("elencoOperatore", operatoreService.findAll());
+
+			model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
+
 
 			return "operatore.html";
 		}
@@ -43,7 +62,7 @@ public class OperatoreController {
 	public String getOperatoreForm(Model model) {
 		model.addAttribute("operatore", new Operatore());
 
-		return "admin/operatoreForm.html";
+		return "operatoreForm.html";
 	}
 
 
@@ -61,8 +80,10 @@ public class OperatoreController {
 	@GetMapping("/elencoOperatori")
 	public String getElencoOperatori(Model model) {
 
-		List<Operatore> operatori = operatoreService.findAll();
-		model.addAttribute("operatore", operatori);
+		List<Operatore> elencoOperatori = operatoreService.findAll();
+		model.addAttribute("elencoOperatori", elencoOperatori);
+		model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
+
 
 		return "elencoOperatori.html";
 	}
@@ -70,21 +91,22 @@ public class OperatoreController {
 
 
 	//se clicco su cancella mi porta alla pagina di conferma
-	@GetMapping("/toDeleteOperatore/{id}")
+	@GetMapping("/admin/toDeleteOperatore/{id}")
 	public String toDeleteChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("operatore", operatoreService.findById(id));
 
-		return "admin/toDeleteOperatore.html";
+		return "toDeleteOperatore.html";
 	}
 
 
 	//confermo la cancellazione dell'operatore tramite id
-	@GetMapping("/deleteOperatore/{id}") 
+	@GetMapping("/admin/deleteOperatore/{id}") 
 	public String deleteOPeratore(@PathVariable("id") Long id, Model model) {
 		operatoreService.deleteById(id);
 		model.addAttribute("elencoBuffet", operatoreService.findAll());
+		model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
 
-		return "admin/elencoOperatore.html";
+		return "redirect:/elencoOperatori";
 	}
 
 

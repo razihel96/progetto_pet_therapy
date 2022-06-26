@@ -7,21 +7,62 @@
 
 <body>
 
-	<h6>Menu Amministratore</h6>
 		
 	<h4>Associazione Pet-therapy</h4>
-	<div>
-		<a th:href="@{/operatoreForm}"> Inserisci Operatore </a>
-		<a th:href="@{/operatore}"> </a> 
-	</div>	
-	<div>
-		<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
-		<a th:href="@{/operatore}"> </a> 
+	
+	<!-------------ADMIN-------------->
+		<div th:unless="${role}=='ADMIN'">
+	
+    	
+    	<h6>Menu Amministratore</h6>
+    
+	
+					<div>
+						<a th:href="@{/percorsoForm}"> Inserisci Percorso </a>
+					</div>
+					<div>
+						<a th:href="@{/elencoPercorsi}"> Visualizza i percorsi </a>
+					</div>
+					
+					<div>
+						<a th:href="@{/operatoreForm}"> Inserisci Operatore </a>
+					</div>	
+					
+					<div>
+						<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
+					</div>
+					
+					<br>
 	</div>
-	<br>
-	<div>
-		<a th:href="@{/logout}">Logout</a>
-    </div>
+	
+	
+	
+	 <!-------------UTENTE-------------->
+    <div th:if="${role}=='ADMIN'">
+
+	    	
+	    <h6>Menu Utente</h6>
+	
+	
+					<div>
+						<a th:href="@{/elencoPercorsi}"> Visualizza i percorsi </a>
+					</div>
+					<div>
+						<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
+					</div>
+					
+					<br>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+			<div>
+				<a th:href="@{/logout}">Logout</a>
+		    </div>
 
 		
 </body>

@@ -15,11 +15,9 @@
 			<a href="cane.html" th:href="@{'/cane' + '/' + ${cane.id}}" 
 			th:text="${cane.nome}">NOME</a>
 			<span> --- </span>
-			<a href ="cane.html" th:href="@{'/toDeleteCane' + '/' + ${cane.id}}"
-			th:text="cancella_cane">cancella</a>
-			<span> --- </span>
-			<a th:href="@{'/cane' + '/' + ${cane.id} + '/percorsoForm'}"> Inserisci percorso </a> 
-
+			<a href ="cane.html" th:href="@{'/admin/toDeleteCane' + '/' + ${cane.id}}"
+			th:text="Cancella">cancella</a>
+			
 		
 			
 			</li> 

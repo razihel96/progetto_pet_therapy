@@ -22,6 +22,7 @@ import com.example.demo.model.Cane;
 import com.example.demo.model.Operatore;
 import com.example.demo.service.CaneService;
 import com.example.demo.service.OperatoreService;
+import com.example.demo.service.PercorsoService;
 import com.example.demo.upload.FileUploadUtil;
 
 
@@ -36,8 +37,13 @@ public class CaneController {
 
 	@Autowired 
 	private OperatoreService operatoreService;
+	
+	@Autowired
+	private PercorsoService percorsoService;
 
 
+	
+	
 	@PostMapping("/cane")
 	public String addCane(@RequestParam("idOperatore") String idOperatore, @Valid @ModelAttribute ("cane") Cane cane, 
 			@RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) throws IOException {
@@ -63,11 +69,16 @@ public class CaneController {
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
 			model.addAttribute("cane", cane);
+			model.addAttribute("elencoCani", caneService.findAll());
+			model.addAttribute("elencoPercorsi", percorsoService.findAll());
+			model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
 
-			return "admin/cane.html";
+
+			return "elencoCani.html";
+			
 		}
 		//se qualcosa è andato storto, torno alla form
-		return "admin/caneForm.html";
+		return "caneForm.html";
 
 	}
 
@@ -76,6 +87,8 @@ public class CaneController {
 	public String getCane(@PathVariable("id") Long id, Model model) {
 		Cane cane = caneService.findById(id);
 		model.addAttribute("cane", cane);
+		
+		model.addAttribute("percorso", cane.getPercorso());
 
 		return "cane.html";
 	}
@@ -84,26 +97,30 @@ public class CaneController {
 	//elenco dei cani senza id operatore
 	@GetMapping("/elencoCani") 
 	public String getElencoCani(Model model) {
-		List<Cane> cani = caneService.findAll();
-		model.addAttribute("cani", cani);
+		List<Cane> elencoCani = caneService.findAll();
+		model.addAttribute("elencoCani", elencoCani);
+		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+
 
 		return "elencoCani.html";
 	}
 
 
 	//elenco dei cani con id operatore
-	@GetMapping("/elencoCani/{id}") 
+	@GetMapping("/operatore/{id}/elencoCani") 
 	public String getElencoCaniId(@PathVariable("id") Long id, Model model) {
 		Operatore operatore = operatoreService.findById(id);		
-		List<Cane> cani = caneService.getByOperatore(operatore);
-		model.addAttribute("cani", cani);
+		List<Cane> elencoCani = caneService.getByOperatore(operatore);
+		model.addAttribute("elencoCani", elencoCani);
+		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+
 
 		return "elencoCani.html";
 	}
 
 
 	//collego il cane al suo operatore tramite l'id di quest'ultimo
-	@GetMapping("/cane/{id}/caneForm") 
+	@GetMapping("/admin/operatore/{id}/caneForm") 
 	public String creaCane(@PathVariable("id") Long id, Model model) {
 
 		Operatore operatore = operatoreService.findById(id);
@@ -111,13 +128,27 @@ public class CaneController {
 		cane.setOperatore(operatore);
 
 		model.addAttribute("cane", cane);
+		model.addAttribute("elencoCani", caneService.findAll());
+		model.addAttribute("elencoPercorsi", percorsoService.findAll());
+
 
 		return "caneForm.html";
 	}
+	
+	
+	
+	@PostMapping("/admin/operatore/{id}/caneForm")
+	public String save(Cane cane) {
+		caneService.save(cane);
+		
+		return "redirect:/admin/operatore/{id}/caneForm";
+	}
+	
+	
 
 
 	//mi chiede la conferma per cancellare un cane
-	@GetMapping("/toDeleteCane/{id}") 
+	@GetMapping("/admin/toDeleteCane/{id}") 
 	public String toDeleteCane(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("cane", caneService.findById(id));
@@ -128,16 +159,19 @@ public class CaneController {
 
 
 	//mi cancella il cane tramite il suo id
-	@GetMapping("deleteCane/{id}")
+	@GetMapping("/admin/deleteCane/{id}")
 	public String deleteCane(@PathVariable("id") Long id, Model model) {
 		caneService.deleteById(id);
+		model.addAttribute("elencoCani", caneService.findAll());
+		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
 
-		return "deleteCane.html";
+
+		return "elencoCani.html";
 	}
+	
+	
 
-
-
-
+	
 }
 
 
