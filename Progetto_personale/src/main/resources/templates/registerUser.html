@@ -43,6 +43,13 @@
             <td th:if="${#fields.hasErrors('user.cognome')}"
                 th:errors="${user.cognome}" th:style="'color:red'"></td>
         </tr>
+         <tr>
+            <td>Indirizzo:</td>
+            <td><input type="text" placeholder="indirizzo" required
+                       th:field="${user.indirizzo}"/></td>
+            <td th:if="${#fields.hasErrors('user.indirizzo')}"
+                th:errors="${user.indirizzo}" th:style="'color:red'"></td>
+        </tr>
     </table>
     
     <div>

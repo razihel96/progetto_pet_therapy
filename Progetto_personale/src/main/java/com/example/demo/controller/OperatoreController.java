@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.controller.validator.OperatoreValidator;
 import com.example.demo.model.Operatore;
 import com.example.demo.service.OperatoreService;
+import com.example.demo.session.SessionDataUser;
 
 
 
@@ -24,30 +25,29 @@ import com.example.demo.service.OperatoreService;
 public class OperatoreController {
 
 	@Autowired
-	OperatoreService operatoreService;
+	private OperatoreService operatoreService;
 	
 	@Autowired 
-	OperatoreValidator operatoreValidator;
+	private OperatoreValidator operatoreValidator;
+
+	@Autowired
+	private SessionDataUser sessionDataUser;
+	
 
 	
 	
-
 	@PostMapping("/operatore") 
 	public String addOperatore(@Valid @ModelAttribute("operatore") Operatore operatore, 
 			BindingResult bindingResult, Model model) {
 
-		
-		
-		operatoreValidator.validate(operatore, bindingResult);
-		
-		
+		operatoreValidator.validate(operatore, bindingResult);	
 		
 		if(!bindingResult.hasErrors()) {
 			operatoreService.save(operatore);
 			model.addAttribute("operatore", operatore);
 			model.addAttribute("elencoOperatore", operatoreService.findAll());
 
-			model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
+			model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 			return "operatore.html";
@@ -56,6 +56,8 @@ public class OperatoreController {
 		return "operatoreForm.html";
 	}
 
+	
+	
 
 	//form dell'operatore
 	@GetMapping("/operatoreForm") 
@@ -66,6 +68,7 @@ public class OperatoreController {
 	}
 
 
+	
 	//prendo un operatore per il suo id
 	@GetMapping("/operatore/{id}") 
 	public String getOperatore(@PathVariable("id") Long id, Model model) {
@@ -76,13 +79,14 @@ public class OperatoreController {
 	}
 
 
+	
 	//prendo l'elenco degli operatori senza id
 	@GetMapping("/elencoOperatori")
 	public String getElencoOperatori(Model model) {
 
 		List<Operatore> elencoOperatori = operatoreService.findAll();
 		model.addAttribute("elencoOperatori", elencoOperatori);
-		model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 		return "elencoOperatori.html";
@@ -98,13 +102,14 @@ public class OperatoreController {
 		return "toDeleteOperatore.html";
 	}
 
+	
 
 	//confermo la cancellazione dell'operatore tramite id
 	@GetMapping("/admin/deleteOperatore/{id}") 
 	public String deleteOPeratore(@PathVariable("id") Long id, Model model) {
 		operatoreService.deleteById(id);
 		model.addAttribute("elencoBuffet", operatoreService.findAll());
-		model.addAttribute("role", operatoreService.getCredentialsService().getRoleAuthenticated());			
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 		return "redirect:/elencoOperatori";
 	}

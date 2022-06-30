@@ -58,6 +58,19 @@ public class User {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
+
+	public Percorso getPercorso() {
+		return percorso;
+	}
+
+	public void setPercorso(Percorso percorso) {
+		this.percorso = percorso;
+	}
+	
+	
+
+	
+	
 	
 	
 

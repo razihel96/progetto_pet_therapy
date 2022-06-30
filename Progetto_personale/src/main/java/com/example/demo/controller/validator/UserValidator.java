@@ -20,6 +20,8 @@ public class UserValidator implements Validator {
         User user = (User) o;
         String nome = user.getNome().trim();
         String cognome = user.getCognome().trim();
+        String indirizzo = user.getIndirizzo().trim();
+
 
         if (nome.isEmpty())
             errors.rejectValue("nome", "required");
@@ -30,7 +32,10 @@ public class UserValidator implements Validator {
             errors.rejectValue("cognome", "required");
         else if (cognome.length() < MIN_NAME_LENGTH || cognome.length() > MAX_NAME_LENGTH)
             errors.rejectValue("cognome", "size");
-    }
+        
+        if (indirizzo.isEmpty())
+            errors.rejectValue("indirizzo", "required");
+    	}
 
     @Override
     public boolean supports(Class<?> clazz) {

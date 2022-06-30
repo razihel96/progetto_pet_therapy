@@ -21,8 +21,10 @@ import com.example.demo.controller.validator.CaneValidator;
 import com.example.demo.model.Cane;
 import com.example.demo.model.Operatore;
 import com.example.demo.service.CaneService;
+import com.example.demo.service.CredentialsService;
 import com.example.demo.service.OperatoreService;
 import com.example.demo.service.PercorsoService;
+import com.example.demo.session.SessionDataUser;
 import com.example.demo.upload.FileUploadUtil;
 
 
@@ -41,7 +43,8 @@ public class CaneController {
 	@Autowired
 	private PercorsoService percorsoService;
 
-
+	@Autowired
+	private SessionDataUser sessionDataUser;
 	
 	
 	@PostMapping("/cane")
@@ -71,7 +74,7 @@ public class CaneController {
 			model.addAttribute("cane", cane);
 			model.addAttribute("elencoCani", caneService.findAll());
 			model.addAttribute("elencoPercorsi", percorsoService.findAll());
-			model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+			model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 			return "elencoCani.html";
@@ -99,7 +102,7 @@ public class CaneController {
 	public String getElencoCani(Model model) {
 		List<Cane> elencoCani = caneService.findAll();
 		model.addAttribute("elencoCani", elencoCani);
-		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 		return "elencoCani.html";
@@ -112,7 +115,7 @@ public class CaneController {
 		Operatore operatore = operatoreService.findById(id);		
 		List<Cane> elencoCani = caneService.getByOperatore(operatore);
 		model.addAttribute("elencoCani", elencoCani);
-		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 		return "elencoCani.html";
@@ -163,7 +166,7 @@ public class CaneController {
 	public String deleteCane(@PathVariable("id") Long id, Model model) {
 		caneService.deleteById(id);
 		model.addAttribute("elencoCani", caneService.findAll());
-		model.addAttribute("role", caneService.getCredentialsService().getRoleAuthenticated());
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 		return "elencoCani.html";

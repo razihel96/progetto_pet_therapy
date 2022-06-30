@@ -7,6 +7,11 @@
 </head>
 
 <body>
+
+
+<!-------------ADMIN-------------->
+<div th:if="${loggedCredential.role}=='ADMIN'">
+
 	<div>
 		<h4>Elenco cani:</h4>
 		<ul>
@@ -25,6 +30,35 @@
 			
 		</ul>
 	</div>
+	
+</div>
+
+
+
+<!-------------UTENTE-------------->
+<div th:unless="${loggedCredential.role}=='ADMIN'">
+
+
+	<div>
+		<h4>Elenco cani:</h4>
+		<ul>
+			<li th:each="cane : ${elencoCani}">
+			
+			<a href="cane.html" th:href="@{'/cane' + '/' + ${cane.id}}" 
+			th:text="${cane.nome}">NOME</a>
+			
+		
+			
+			</li> 
+			
+			
+		</ul>
+	</div>
+	
+</div>
+
+
+
 		
 	<footer>
 		<a href="/default"> Home </a>

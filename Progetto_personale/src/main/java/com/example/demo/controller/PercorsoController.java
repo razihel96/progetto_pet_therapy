@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.controller.validator.PercorsoValidator;
 import com.example.demo.model.Percorso;
+import com.example.demo.service.CredentialsService;
 import com.example.demo.service.PercorsoService;
+import com.example.demo.session.SessionDataUser;
 
 
 @Controller
@@ -28,7 +30,14 @@ public class PercorsoController {
 	@Autowired
 	private PercorsoValidator percorsoValidator;
 	
-
+	@Autowired
+	private CredentialsService credentialsService;
+	
+	@Autowired
+	private SessionDataUser sessionDataUser;
+	
+	
+	
 	
 	@PostMapping("/percorso")
 	public String addCane(@Valid @ModelAttribute ("percorso") Percorso percorso, 
@@ -42,8 +51,7 @@ public class PercorsoController {
 
 			percorsoService.save(percorso);
 			model.addAttribute("percorso", percorso);
-			model.addAttribute("role", percorsoService.getCredentialsService().getRoleAuthenticated());			
-
+			model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 			return "percorso.html";
 		}
@@ -77,7 +85,7 @@ public class PercorsoController {
 
 		List<Percorso> elencoPercorsi = percorsoService.findAll();
 		model.addAttribute("elencoPercorsi", elencoPercorsi);
-		model.addAttribute("role", percorsoService.getCredentialsService().getRoleAuthenticated());			
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 
 		return "elencoPercorsi.html";
@@ -99,7 +107,7 @@ public class PercorsoController {
 	public String deletePercorso(@PathVariable("id") Long id, Model model) {
 		percorsoService.deleteById(id);
 		model.addAttribute("elencoPercorsi", percorsoService.findAll());
-		model.addAttribute("role", percorsoService.getCredentialsService().getRoleAuthenticated());
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
 
 		return "elencoPercorsi.html";
 	}

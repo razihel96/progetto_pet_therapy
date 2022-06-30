@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title> Inserimento cane </title>
+</head>
+
+<body>
+<form th:action = "@{/user}" method = "post" >
+
+	
+	<h6 th:text="${loggedCredential.user.nome}"></h6> 
+	<h6 th:text="${loggedCredential.user.cognome}"></h6> 
+	<h6 th:text="${loggedCredential.user.indirizzo}"></h6> 
+
+		
+	<br>
+	<br>
+	
+	
+	<span>Quale percorso vuole intraprendere? </span>
+	<br>
+	<span th:each="data : ${elencoPercorsi}">
+	<input type="radio" th:value="${data.id}" name="percorsoid"/>
+	<label th:text="${data.nome}"></label>
+	</span> 
+	
+	<br>
+	<br>
+	
+	
+	<button type="submit"> Conferma </button> 
+	
+
+</form>	
+</body>
+
+
+</html>

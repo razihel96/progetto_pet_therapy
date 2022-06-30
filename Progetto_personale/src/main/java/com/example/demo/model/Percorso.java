@@ -25,12 +25,12 @@ public class Percorso {
 
 	
 	
-	//percorso intrapreso da più cani
+	//percorso insegnato a più cani
 	@OneToMany(mappedBy="operatore", cascade=CascadeType.REMOVE)
 	private List<Cane> cani;
 	
 	
-	//un percorso può essere intrapreso da più utenti
+	//un percorso può essere scelto da più utenti
 	@OneToMany(mappedBy="percorso", cascade=CascadeType.ALL)
 	private List<User> users;
 	
@@ -76,6 +76,10 @@ public class Percorso {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	public String toString() {
+		return this.getNome();
 	}
 	
 	

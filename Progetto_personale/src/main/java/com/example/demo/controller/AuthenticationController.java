@@ -15,6 +15,7 @@ import com.example.demo.controller.validator.UserValidator;
 import com.example.demo.model.Credentials;
 import com.example.demo.model.User;
 import com.example.demo.service.CredentialsService;
+import com.example.demo.session.SessionDataUser;
 
 
 @Controller
@@ -28,6 +29,12 @@ public class AuthenticationController {
 	
 	@Autowired
 	private CredentialsValidator credentialsValidator;
+	
+	@Autowired
+	private SessionDataUser sessionDataUser;
+	
+	
+	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 
 	public String showRegisterForm (Model model) {
@@ -46,17 +53,30 @@ public class AuthenticationController {
 		return "index.html";
 	}
 	
-    @RequestMapping(value = "/default", method = RequestMethod.GET)
-    public String defaultAfterLogin(Model model) {
-        
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/home.html";
-        }
-        return "admin/home.html";
-    }
 	
+	
+	
+//    @RequestMapping(value = "/default", method = RequestMethod.GET)
+//    public String defaultAfterLogin(Model model) {
+//        
+//    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+//    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+//            return "admin/home.html";
+//        }
+//        return "admin/home.html";
+//    }
+    
+    
+	@RequestMapping(value = "/default", method = RequestMethod.GET)
+	public String defaultAfterLogin(Model model) {
+		model.addAttribute("loggedCredential", sessionDataUser.getLoggedCredentials());
+		return "admin/home.html";
+	}
+		
+		
+		
+		
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user,
                  BindingResult userBindingResult,

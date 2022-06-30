@@ -7,6 +7,11 @@
 </head>
 
 <body>
+
+
+<!-------------ADMIN-------------->
+<div th:if="${loggedCredential.role}=='ADMIN'">
+
 	<div>
 		<h4>Elenco operatori:</h4>
 		<ul>
@@ -21,15 +26,49 @@
 			<a href ="chef.html" th:href="@{'/admin/toDeleteOperatore' + '/' + ${operatore.id}}"
 			th:text="Cancella">cancella</a>
 			<span> --- </span>
+			
 			<a th:href="@{'/admin/operatore' + '/' + ${operatore.id} + '/caneForm'}"> Inserisci Cane </a>
 			<span> --- </span>
+			
 			<a th:href="@{'/operatore' + '/' + ${operatore.id} + '/elencoCani'}"> Visualizza Cani </a>
 			<span> --- </span>
+			
 			<a th:href="@{'/elencoCani'}"> Visualizza tutti i Cani </a>
 			
 			</li> 
 		</ul>
 	</div>
+	
+</div>
+	
+	
+<!-------------UTENTE-------------->
+<div th:unless="${loggedCredential.role}=='ADMIN'">
+	
+	
+	<div>
+		<h4>Elenco operatori:</h4>
+		<ul>
+			<li th:each="operatore : ${elencoOperatori}">
+			
+			
+			<a href="operatore.html" th:href="@{'/operatore' + '/' + ${operatore.id}}" 
+			th:text="${operatore.nome} + ' ' + ${operatore.cognome}">NOME COGNOME</a>
+			<span> --- </span>
+			<a th:href="@{'/operatore' + '/' + ${operatore.id} + '/elencoCani'}"> Visualizza Cani </a>
+			
+			
+			
+			</li> 
+		</ul>
+	</div>
+	
+</div>
+	
+	
+	
+	
+	
 		
 	<footer>
 		<a href="/default">Home</a>

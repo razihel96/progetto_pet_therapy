@@ -10,8 +10,14 @@
 		
 	<h4>Associazione Pet-therapy</h4>
 	
+	
+					
+					
+					
+	
 	<!-------------ADMIN-------------->
-		<div th:unless="${role}=='ADMIN'">
+	    <div th:if="${loggedCredential.role}=='ADMIN'">
+	
 	
     	
     	<h6>Menu Amministratore</h6>
@@ -23,7 +29,7 @@
 					<div>
 						<a th:href="@{/elencoPercorsi}"> Visualizza i percorsi </a>
 					</div>
-					
+					<br>
 					<div>
 						<a th:href="@{/operatoreForm}"> Inserisci Operatore </a>
 					</div>	
@@ -32,17 +38,38 @@
 						<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
 					</div>
 					
+					<div>
+						<a th:href="@{'/elencoCani'}"> Visualizza tutti i Cani </a>
+					</div>
+					<br>
+					<div>
+						<a th:href="@{/elencoUsers}"> Visualizza gli Users </a>
+					</div>
+					<br>
+					<br>
+					<br>
+					<div>
+						<a th:href="@{/userForm}"> Compila Form </a>
+					</div>
+					
+					<div>
+						<a th:href="@{/areaRiservata}"> Area Personale </a>
+					</div>
+					
+					
+					
 					<br>
 	</div>
 	
 	
 	
 	 <!-------------UTENTE-------------->
-    <div th:if="${role}=='ADMIN'">
+		<div th:unless="${loggedCredential.role}=='ADMIN'">
 
 	    	
 	    <h6>Menu Utente</h6>
-	
+	    
+	    
 	
 					<div>
 						<a th:href="@{/elencoPercorsi}"> Visualizza i percorsi </a>
@@ -51,6 +78,22 @@
 						<a th:href="@{/elencoOperatori}"> Visualizza gli Operatori </a>
 					</div>
 					
+					<div>
+						<a th:href="@{'/elencoCani'}"> Visualizza tutti i Cani </a>
+					</div>
+					
+					<br>
+					
+					
+					<div>
+						<a th:href="@{/userForm}"> Compila Form </a>
+					</div>
+					
+					<div>
+						<a th:href="@{/areaRiservata}"> Area Personale </a>
+					</div>
+					
+					<br>
 					<br>
 	
 	</div>

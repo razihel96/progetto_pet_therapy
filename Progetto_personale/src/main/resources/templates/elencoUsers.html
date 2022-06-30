@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Elenco users</title>
+</head>
+
+<body>
+	<div>
+		<h4>Elenco users:</h4>
+		<ul>
+			<li th:each="user : ${elencoUsers}">
+			
+			<span th:text="'Nome: ' + ${user.nome}"> NOME </span>
+            <br>
+            <span th:text="'Cognome: ' + ${user.cognome}"> COGNOME </span>
+            <br>
+            <span th:text="'Indirizzo: ' + ${user.indirizzo}"> INDIRIZZO </span>
+            <br>
+            <span th:text="'Ha scelto il percorso: ' + ${user.percorso}"> PERCORSO </span>
+            <br>
+        
+
+
+			</li> 
+			
+			
+		</ul>
+	</div>
+		
+	<footer>
+		<a href="/default"> Home </a>
+	</footer>
+</body>
+</html>

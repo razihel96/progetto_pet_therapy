@@ -7,6 +7,12 @@
 </head>
 
 <body>
+
+<!-------------ADMIN-------------->
+<div th:if="${loggedCredential.role}=='ADMIN'">
+	    
+	    
+	    
 	<div>
 		<h4>Elenco percorsi:</h4>
 		<ul>
@@ -14,8 +20,10 @@
 			
 			<a href="percorso.html" th:href="@{'/percorso' + '/' + ${percorso.id}}" 
 			th:text="${percorso.nome}">NOME</a>
+			
 			<a href="percorso.html" th:href="@{'/percorso' + '/' + ${percorso.id}}" 
 			th:text="${percorso.descrizione}">DESCRIZIONE</a>
+			
 			<span> --- </span>
 			<a href ="percorso.html" th:href="@{'/admin/toDeletePercorso' + '/' + ${percorso.id}}"
 			th:text="Cancella">cancella</a>
@@ -26,6 +34,34 @@
 			
 		</ul>
 	</div>
+	
+</div>
+	
+<!-------------UTENTE-------------->
+<div th:unless="${loggedCredential.role}=='ADMIN'">
+		
+		
+	<div>
+		<h4>Elenco percorsi:</h4>
+		<ul>
+			<li th:each="percorso : ${elencoPercorsi}">
+			
+			<a href="percorso.html" th:href="@{'/percorso' + '/' + ${percorso.id}}" 
+			th:text="${percorso.nome}">NOME</a>
+			
+			<a href="percorso.html" th:href="@{'/percorso' + '/' + ${percorso.id}}" 
+			th:text="${percorso.descrizione}">DESCRIZIONE</a>
+			
+			</li> 
+			
+			
+		</ul>
+	</div>
+		
+		
+		
+</div>
+		
 		
 	<footer>
 		<a href="/default"> Home </a>

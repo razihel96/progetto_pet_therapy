@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title> Dettagli user </title>
+</head>
+
+<body>
+	<div>
+		<h4> Dettagli User </h4>
+		<div>
+		
+
+			<span th:text = "${loggedCredential.user.nome}"> NOME </span>
+			<br>
+			<span th:text = "${loggedCredential.user.cognome}"> COGNOME </span>
+			<br>
+			<span th:text = "${loggedCredential.user.indirizzo}"> INDIRIZZO </span>
+			
+			<br>
+			<br>
+			
+			<span th:if="${loggedCredential.user.percorso != null }"   
+				th:text = "'Prenotazione per il percorso: ' + ${loggedCredential.user.percorso.nome}"> PERCORSO </span>
+			
+			<span th:unless="${loggedCredential.user.percorso != null }"> Percorso non selezionato. </span>
+				
+			<br>
+			<br>
+			
+		</div>
+	</div>
+	<footer><a href="/default"> Home </a></footer>
+</body>
+</html>

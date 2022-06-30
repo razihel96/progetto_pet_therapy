@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.Credentials;
+import com.example.demo.model.User;
 import com.example.demo.repository.CredentialsRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class CredentialsService {
 
 	@Autowired
 	protected CredentialsRepository credentialsRepository;
+	
+	
+	
 	
 	@Transactional
 	public Credentials getCredentials(Long id) {
@@ -35,16 +39,13 @@ public class CredentialsService {
 		
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
-        credentials.setRole(Credentials.ADMIN_ROLE);
+        credentials.setRole(Credentials.DEFAULT_ROLE);
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         return this.credentialsRepository.save(credentials);
     }
     
+  
     
-    @Transactional
-    public String getRoleAuthenticated() {
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = this.getCredentials(userDetails.getUsername());
-    	return credentials.getRole();
-    }
+
+    
 }
