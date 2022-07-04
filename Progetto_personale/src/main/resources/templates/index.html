@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8" />
-	<link th:href="@{/css/style.css}" rel="stylesheet">
-	
-	<title>Associazione Pet-therapy: benvenuti! </title>
-</head>
+<head th:replace="fragments/base.html :: headerfiles(title='Associazione Pet-therapy: benvenuti!')"></head>
 
 <body>
-
+	<header th:replace="fragments/base.html :: intestazione"></header>
     <div>
         <h1>Associazione Pet-therapy</h1>
     </div>
