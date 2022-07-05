@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-	<meta charset="UTF-8" />
-	<link th:href="@{/css/style.css}" rel="stylesheet">
-	
-	<title> LoginForm </title>
+<head th:replace="fragments/base.html :: headerfiles(title='Login Form')">
 </head>
 
 
 
 <body>
-    <div>
-        <h1>Associazione Pet-therapy</h1>
-    </div>
+<header class="navbar_index">
+	<h1>Associazione Pet therapy</h1>
+</header>
 
 	<form th:action="@{/login}" method="POST">
-		<div>
+		<div >
 			
 				<span>Username:</span>
 				<span><input name="username" type="text" required /></span>
