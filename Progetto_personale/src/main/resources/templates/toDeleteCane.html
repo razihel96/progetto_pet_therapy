@@ -9,11 +9,14 @@
 	<header class="navbar_index">
 		<h1>Associazione Pet therapy</h1>
 	</header>
-	<div>
-		<h4>Cane da cancellare:</h4>
+	<div class = "toDelete">
+		<h2>Cane da cancellare:</h2>
+		<br>
 		<div>
-			<span th:text = "${cane.nome}"> COGNOME </span>
-			<span th:text = "${cane.razza}"> RAZZA </span>
+			<h4>Nome: </h4>
+			<span th:text = "${cane.nome}">COGNOME</span>
+			<h4>Razza: </h4>
+			<span th:text = "${cane.razza}">RAZZA</span>
 			
 			
 		</div>

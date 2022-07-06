@@ -16,6 +16,7 @@ header {
 header > h1 {
     font-family: 'Arima', cursive;
     font-size: 50px;
+    font-weight: bold;
     color: #ff504b;
     margin: 2%;
 }
@@ -152,4 +153,16 @@ footer > a {
 
 .risposta p {
 	color: black;
+}
+
+/*********************/
+/******delete******/
+/*********************/
+
+.toDelete {
+	text-align: center;
+}
+
+.toDelete h4, h2 {
+	font-weight: bold;
 }
