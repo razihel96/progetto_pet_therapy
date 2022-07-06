@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8" />
-	<title> Inserimento cane </title>
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Associazione Pet-therapy: Elenco User')">
 </head>
 
-<body>
+<body class = "body_home">
+<header class="navbar_index">
+	<h1>Associazione Pet therapy</h1>
+</header>
 <form th:action = "@{/user}" method = "post" >
 
 	
@@ -33,6 +35,13 @@
 	
 
 </form>	
+
+	<footer>
+		<a href="/default">
+			<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Home</button>
+		</a>
+	</footer>
+
 </body>
 
 

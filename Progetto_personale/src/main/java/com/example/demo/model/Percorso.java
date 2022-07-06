@@ -15,28 +15,22 @@ public class Percorso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id; //chiave primaria nel mapping
-	
+	private Long id; // chiave primaria nel mapping
+
 	@NotBlank
 	private String nome;
 
 	@NotBlank
 	private String descrizione;
 
-	
-	
-	//percorso insegnato a più cani
-	@OneToMany(mappedBy="operatore", cascade=CascadeType.REMOVE)
+	// percorso insegnato a più cani
+	@OneToMany(mappedBy = "operatore", cascade = CascadeType.ALL)
 	private List<Cane> cani;
-	
-	
-	//un percorso può essere scelto da più utenti
-	@OneToMany(mappedBy="percorso", cascade=CascadeType.ALL)
+
+	// un percorso può essere scelto da più utenti
+	@OneToMany(mappedBy = "percorso")
 	private List<User> users;
-	
-	
-	
-	
+
 	/* SETTER & GETTERS */
 	public Long getId() {
 		return id;
@@ -77,11 +71,9 @@ public class Percorso {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+
 	public String toString() {
 		return this.getNome();
 	}
-	
-	
 
 }

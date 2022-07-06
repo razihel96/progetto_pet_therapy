@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="ISO-8859-1" />
-	<title> Dettagli operatore </title>
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Associazione Pet-therapy: Visualizza Operatore')">
 </head>
 
-<body>
+<body class = "body_home">
+<header class="navbar_index">
+	<h1>Associazione Pet therapy</h1>
+</header>
 	<div>
 		<h4> Dettagli operatore </h4>
 		<div>
@@ -19,6 +21,11 @@
 			
 		</div>
 	</div>
-	<footer><a href="/default"> Home </a></footer>
+	<footer>
+		<a href="/default">
+			<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Home</button>
+		</a>
+	</footer>
+
 </body>
 </html>

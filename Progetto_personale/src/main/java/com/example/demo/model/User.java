@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class User {
 	private String email;
 
 	// un utente può intraprendere un solo percorso
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Percorso percorso;
 
 	/* SETTERS & GETTERS */

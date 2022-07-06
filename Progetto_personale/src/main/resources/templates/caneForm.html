@@ -1,54 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8" />
-	<title> Inserimento cane </title>
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Associazione Pet-therapy: Inserimento Cane')">
 </head>
 
-<body>
-<form th:action = "@{/cane}" method = "post" th:object = "${cane}" enctype="multipart/form-data">
+<body class="body_home">
 
-	<div th:if="${#fields.hasGlobalErrors()}">
-		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">ERRORE</p>
-	</div>
-	
-	 
-	
-	<div> Nome: <input type="text" th:field="*{nome}" /> </div>
-	<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-	
-	<div> Razza: <input type="text" th:field="*{razza}" /> </div>
-	<div th:if="${#fields.hasErrors('razza')}" th:errors="*{razza}"></div>
-	
-	<div> Curriculum: <input type="text" th:field="*{curriculum}" /> </div>
-	<div th:if="${#fields.hasErrors('curriculum')}" th:errors="*{curriculum}"></div>
-	
-	
-	
-	<div> Foto: <input type="file" name="image" accept="image/png, image/jpeg" required/> </div>
-	
-	<br>
-	<br>
-	<span>Associa al cane un percorso: </span>
-	<br>
-	<span th:each="data : ${elencoPercorsi}">
-	<input type="radio" th:field="*{percorso}" th:value="${data.id}"/>
-	<label th:text="${data.nome}"></label>
-	</span>
-	
-	<br>
-	<br>
-	
-	<!-- verifico se sto inserendo il cane corrente all'operatore giusto -->
-	<div th:text="'Cane addestrato da: ' + *{operatore.nome}"> mi ritorna il nome dell'operatore </div>
-	
-	
-	<div> 
+	<header class="navbar_index">
+		<h1>Associazione Pet therapy</h1>
+	</header>
+
+	<form th:action="@{/cane}" method="post" th:object="${cane}" enctype="multipart/form-data">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">ERRORE</p>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Nome:</label> <input type="text"
+				class="form-control" id="exampleInputEmail1"
+				aria-describedby="emailHelp" placeholder="Nome" required
+				th:field="*{nome}" /> <span th:if="${#fields.hasErrors('nome')}"
+				th:errors="*{nome}"></span>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">Razza:</label> <input type="text"
+				class="form-control" id="exampleInputPassword1" placeholder="Razza"
+				required th:field="*{razza}" /> <span
+				th:if="${#fields.hasErrors('razza')}" th:errors="*{razza}"></span>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">Curriculum:</label> <input
+				type="text" class="form-control" id="exampleInputPassword1"
+				placeholder="Curriculum" required th:field="*{curriculum}" /> <span
+				th:if="${#fields.hasErrors('curriculum')}" th:errors="*{curriculum}"></span>
+		</div>
+		<input type="file" name="image" accept="image/png, image/jpeg" required/>
+		<br>
+		<span>Associa al cane un percorso: </span>
+		<div class="form-check">
+			<span th:each="data : ${elencoPercorsi}"> 
+			<input type="radio"
+				th:field="*{percorso}" th:value="${data.id}" /> <label
+				th:text="${data.nome}"></label>
+			</span>
+		</div>
+		<!-- verifico se sto inserendo il cane corrente all'operatore giusto -->
+		<div th:text="'Cane addestrato da: ' + *{operatore.nome}">mi
+			ritorna il nome dell'operatore</div>
 		<!-- per farmi ritornare il nome dell'operatore devo passargli il suo id -->
-		<input type="hidden" name="idOperatore" th:value=*{operatore.id}> 
-		<button type="submit"> Conferma </button> 
-	</div>
-</form>	
+			<input type="hidden" name="idOperatore" th:value=*{operatore.id}>
+			<button type="submit" class="btn btn-warning">Conferma</button>
+	</form>
+
+
+	<footer>
+		<a href="/default">
+			<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Home</button>
+		</a>
+	</footer>
+
 </body>
 
 

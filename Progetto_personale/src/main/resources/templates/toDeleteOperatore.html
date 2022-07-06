@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="ISO-8859-1" />
-	<title>Conferma Cancellazione</title>
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Associazione Pet-therapy: Cancella Operatore')">
 </head>
 
-<body>
+<body class = "body_home">
+
+	<header class="navbar_index">
+		<h1>Associazione Pet therapy</h1>
+	</header>
 	<div>
 		<h4>Operatore da cancellare:</h4>
 		<div>
@@ -16,8 +19,9 @@
 		</div>
 		
 		<div>
-			<a href ="operatore.html" th:href="@{'/admin/deleteOperatore' + '/' + ${operatore.id}}"
-			th:text="CONFERMA">CONFERMA CANCELLAZIONE</a>
+			<a href ="operatore.html" th:href="@{'/admin/deleteOperatore' + '/' + ${operatore.id}}">
+			<button class="btn btn-warning my-2 my-sm-0" type="submit" th:text="CONFERMA">CONFERMA CANCELLAZIONE</button>
+			</a>
 		</div>	
 	</div>
 		
