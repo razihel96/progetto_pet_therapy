@@ -11,14 +11,14 @@
 	</header>
 
 
-	<!-------------ADMIN-------------->
+	<!-------------ADMIN--------------
 	<div th:if="${loggedCredential.role}=='ADMIN'">
-
+-->
 
 
 		<!--    	<h6>Menu Amministratore</h6> -->
 
-
+<div>
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<span class="navbar-brand">Menu Amministratore</span>
@@ -80,7 +80,7 @@
 
 
 
-	<!-------------UTENTE-------------->
+	<!-------------UTENTE-------------
 	<div th:unless="${loggedCredential.role}=='ADMIN'">
 
 
@@ -134,7 +134,7 @@
 
 
 	</div>
-
+-->
 	<footer>
 		<a th:href="@{/logout}">
 			<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
